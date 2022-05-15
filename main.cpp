@@ -90,17 +90,18 @@ unsigned long long int Fibonacci(unsigned int n){
     return Fibonacci(n-1) + Fibonacci(n-2);
 }
 void PrintReverseString(const string& str, ostream& output){
-//    if(str.size() == 0)
-//    {
+//    if(str.size() == 0){
 //        return;
 //    }
-//    PrintReverseString(str.substr(1));
-//    cout << str[0];
+//    PrintReverseString(str.substr(1),output);
+    return;
+
 }
-// You may change the parameters of these functions
-size_t MinimumPosition(const int array[], size_t size){
-	return 0;
+
+size_t MinimumPosition(const int array[], size_t size) {
+    return -1;
+
 }
 void SelectionSort(int array[], size_t size){
-
+    return;
 }
