@@ -11,7 +11,7 @@ using std::ostream;
 unsigned long long int Fibonacci(unsigned int n);
 void PrintReverseString(const string& str, ostream& output = cout);
 // You may change the parameters of these functions
-size_t MinimumPosition(const int array[], size_t size);
+size_t MinimumPosition(const int array[], size_t size,size_t min);
 void SelectionSort(int array[], size_t size);
 
 
@@ -48,12 +48,12 @@ int main() {
 
 
 	cout << "Testing Minimum Position Finding" << endl;
-	for (int i = 0; i < TESTS; ++i) {
-		minimumResponses[i] = MinimumPosition(data[i], ELEMENTS);
-		if (minimumResponses[i] == minimumSolutions[i]){
-			cout << "\tPassed " << ++passed << " tests" << endl;
-		}
-	}
+    for (int i = 0; i < TESTS; ++i) {
+        minimumResponses[i] = MinimumPosition(data[i], ELEMENTS, 0);
+        if (minimumResponses[i] == minimumSolutions[i]){
+            cout << "\tPassed " << ++passed << " tests" << endl;
+        }
+    }
 	cout << "Testing Sorting" << endl;
 	bool equal;
 	for (int i = 0; i < TESTS; ++i) {
@@ -90,18 +90,47 @@ unsigned long long int Fibonacci(unsigned int n){
     return Fibonacci(n-1) + Fibonacci(n-2);
 }
 void PrintReverseString(const string& str, ostream& output){
-//    if(str.size() == 0){
-//        return;
-//    }
-//    PrintReverseString(str.substr(1),output);
-    return;
+    if (str.size() == 1) {
+        output << str.at(0);
+    }
+    else if (str.size() == 0) {
+        output << "";
+    }
+    else {
+        PrintReverseString(str.substr(1), output);
+        output << str.at(0);
+    }
 
 }
 
-size_t MinimumPosition(const int array[], size_t size) {
-    return -1;
+size_t MinimumPosition(const int array[], size_t size,size_t min) {
+    if(size == min){
+        return min;
+    }else{
+        if(array[size] < array[min]){
+            return MinimumPosition(array,size,min+1);
+        }else{
+            return MinimumPosition(array,size-1,min);
+        }
+    }
 
 }
 void SelectionSort(int array[], size_t size){
-    return;
+    int temp = 0;
+    if(size == 1 || size == 0) {
+        return;
+    }
+    else{
+        if(array[size-2] > array[size-1]){
+            temp = array[size - 1];
+            array[size - 1] = array[size - 2];
+            array[size - 2] = temp;
+            SelectionSort(array,size-1);
+        }
+        SelectionSort(array,size-1);
+
+        if(array[size-2] > array[size-1]){
+            SelectionSort(array,size);
+        }
+    }
 }
